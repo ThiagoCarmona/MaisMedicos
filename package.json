@@ -1,6 +1,6 @@
 {
   "name": "medicos",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "homepage": "https://thiagocarmona.github.io/maismedicos",
   "type": "module",
