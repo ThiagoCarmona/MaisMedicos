@@ -1,0 +1,7 @@
+body{
+  justify-content: center;
+  display: flex;
+  font-family: 'Montserrat', sans-serif;
+  color: #555;
+  font-weight: 600;
+}
