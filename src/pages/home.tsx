@@ -28,6 +28,7 @@ export const Home = () => {
   }>({ ativos: [], inativos: [] });
 
   const [modalOpen, setModalOpen] = useState(false);
+  
 
   const [addMedicoNome, setAddMedicoNome] = useState('');
   const [addMedicoCPF, setAddMedicoCPF] = useState('');
