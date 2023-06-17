@@ -45,12 +45,24 @@
 }
 
 .submit_button {
-    padding: 5px;
+    padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 1.2rem;
     background-color: #366631;
     cursor: pointer;
     width: 100px;
-    color: white
+    color: white;
+    align-self: center;
+}
+
+.radio_group:not(:last-child) {
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.group_label {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    text-decoration: underline;
 }

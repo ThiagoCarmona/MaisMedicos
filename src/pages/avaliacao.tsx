@@ -37,7 +37,7 @@ export const Avaliacao = () => {
     <div>
       <h1 className={styles.title}>AVALIAÇÃO DO PROGRAMA MÉDICOS PELO BRASIL</h1>
       <div className={styles.container}>
-        <form className={styles.form}>
+        <form className={styles.form} action='/'>
           <div className={styles.form_group}>
             <label htmlFor="email">Realiza a recepção dos médicos tutores e médicos bolsistas? </label>
             <div className={styles.radio_group}>
@@ -232,8 +232,9 @@ export const Avaliacao = () => {
 
 
           <button className={styles.submit_button} 
-          onClick={(ev) => {
-            ev.preventDefault();
+          type='submit'
+          onClick={() => {
+            //ev.preventDefault();
             addSectTwo({
               a: a,
               a_text: a_text,
