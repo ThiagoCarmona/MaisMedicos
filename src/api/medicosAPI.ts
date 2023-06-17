@@ -1,7 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://ec2-3-145-89-43.us-east-2.compute.amazonaws.com:3000',
 });
 
 export const getUfs = async (): Promise<string[]> => {
