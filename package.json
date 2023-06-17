@@ -2,7 +2,7 @@
   "name": "medicos",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://thiagocarmona.github.io/maismedicos",
+  "homepage": "https://ThiagoCarmona.github.io/MaisMedicos",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",

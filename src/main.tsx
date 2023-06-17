@@ -7,7 +7,7 @@ import { UserProvider } from './contexts/User/UserProvider.tsx'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <UserProvider>
-    <BrowserRouter basename='https://thiagocarmona.github.io/maismedicos'>
+    <BrowserRouter>
         <App />
     </BrowserRouter>
     </UserProvider>
