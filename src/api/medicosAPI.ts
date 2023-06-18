@@ -68,10 +68,12 @@ interface ISectTwo {
   i_text: string;
 }
 
-export const addSectTwo = async (data: ISectTwo, email: string): Promise<string> => {
+export const addSectTwo = async (data: ISectTwo, email: string, uf: string, municipio: string): Promise<string> => {
   const response = await api.post('/sect-two', {
     data,
-    email
+    email,
+    uf,
+    municipio,
   });
 
   return response.data;
