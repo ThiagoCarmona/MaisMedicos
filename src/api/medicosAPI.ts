@@ -79,6 +79,30 @@ export const addSectTwo = async (data: ISectTwo, email: string, uf: string, muni
   return response.data;
 }
 
+interface IAdaps {
+  a: string;
+  b: string;
+  b_text: string;
+  c1: string;
+  c2: string;
+  c3: string;
+  c4: string;
+  d: string;
+  d_text: string;
+  e: string;
+}
+
+export const addAdaps = async (data: IAdaps, email: string, uf: string, municipio: string): Promise<string> => {
+  const response = await api.post('/adaps', {
+    data,
+    email,
+    uf,
+    municipio,
+  });
+ 
+  return response.data;
+}
+
 export const checkEmail = async (email: string): Promise<boolean> => {
   const response = await api.post('/check-email', { email });
   return response.data;

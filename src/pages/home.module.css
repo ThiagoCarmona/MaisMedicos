@@ -88,6 +88,14 @@
   margin: 0
 }
 
+.ativo {
+  color: #4bd34b;
+}
+
+.desligado {
+  color: #d34b4b;
+}
+
 .medico_card h3 {
   margin: 5px;
   padding: 0;

@@ -1,7 +1,11 @@
 import styles from './avaliacao.module.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { addAdaps } from '../api/medicosAPI';
+import { UserContext } from '../contexts/User/UserContext';
 
 export const Adaps = () => {
+
+  const user = useContext(UserContext);
 
   const [a, seta] = useState('' as string);
 
@@ -169,9 +173,35 @@ export const Adaps = () => {
 
 
           <button className={styles.submit_button} 
-          onClick={() => {
-            //ev.preventDefault();
-            console.log(a, b, b_text, c1, c2, c3, c4, d, d_text, e);
+          onClick={async () => {
+            const data = {
+              a: a,
+              b: b,
+              b_text: b_text,
+              c1: c1,
+              c2: c2,
+              c3: c3,
+              c4: c4,
+              d: d,
+              d_text: d_text,
+              e: e
+            }
+            await addAdaps(data, user.email, user.uf, user.municipio);
+
+            //reseat all values
+            seta('');
+            setb('');
+            setb_text('');
+            setc1('');
+            setc2('');
+            setc3('');
+            setc4('');
+            setd('');
+            setd_text('');
+            sete('');
+
+            alert('Avaliação enviada com sucesso!');
+            
           }}
           >Concluir</button>
         </form>

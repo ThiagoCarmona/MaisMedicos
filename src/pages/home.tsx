@@ -253,7 +253,7 @@ export const Home = () => {
           return (
             <div className={styles.medico_card} key={i}>
               <div className={styles.medico_card_header}>
-                <h2 className={styles.status}>Ativo</h2>
+                <h2 className={`${styles.status} ${styles.ativo}`}>Ativo</h2>
                 <h3>{medico}</h3>
               </div>
               <div className={styles.medico_card_body}>
@@ -274,7 +274,7 @@ export const Home = () => {
           return (
             <div className={styles.medico_card} key={i}>
               <div className={styles.medico_card_header}>
-                <h2 className={styles.status}>Desligado</h2>
+                <h2 className={`${styles.status} ${styles.desligado}`}>Desligado</h2>
                 <h3>{medico}</h3>
               </div>
               <div className={styles.medico_card_body}>
