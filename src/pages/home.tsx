@@ -105,6 +105,8 @@ export const Home = () => {
       console.log(qtMedicos)
       const result = await addAvaliacao(email, UF, city, qtMedicos, valuesAgregated.Excelente || 0, valuesAgregated['Muito satisfatorio'] || 0, valuesAgregated.Satisfatório || 0, valuesAgregated['Pouco satisfatório'] || 0, valuesAgregated.Insatisfatório || 0)
       user.saveEmail(email);
+      user.saveUf(UF);
+      user.saveMunicipio(city);
       console.log(result)
       navigate('/avaliacao');
     }else{
@@ -158,7 +160,7 @@ export const Home = () => {
         </div>
 
         <div className={styles.form_group}>
-          <label htmlFor="city">Cidade</label>
+          <label htmlFor="city">Município</label>
           <select name="city" id="city" onChange={handleCityChange}>
             <option value="disabled" disabled selected>Selecione</option>
             {citiesList.map((city, i) => {
