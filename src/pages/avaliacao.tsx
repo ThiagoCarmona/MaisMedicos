@@ -1,10 +1,17 @@
 import { addSectTwo } from '../api/medicosAPI';
 import styles from './avaliacao.module.css';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../contexts/User/UserContext';
+import { useNavigate } from 'react-router-dom';
 export const Avaliacao = () => {
-
+  const navigate = useNavigate();
   const user = useContext(UserContext);
+
+  useEffect(() => {
+    if(!user.email) {
+      navigate('/');
+    }
+  }, [user.email, navigate]);
 
   const [a, seta] = useState('' as string);
   const [a_text, seta_text] = useState('' as string);
@@ -39,12 +46,12 @@ export const Avaliacao = () => {
       <div className={styles.container}>
         <form className={styles.form} action='/'>
           <div className={styles.form_group}>
-            <label htmlFor="email">Realiza a recepção dos médicos tutores e médicos bolsistas? </label>
+            <label htmlFor="email">Realiza a recepção dos médicos tutores e médicos bolsistas?</label>
             <div className={styles.radio_group}>
               <div className={styles.radio}>
-                <input type="radio" name="a" id="a_sim" value="sim" required onChange={(e) => {seta(e.target.value)}}/>
+                <input type="radio" name="a" id="a_sim" value="Sim" required onChange={(e) => {seta(e.target.value)}}/>
                 <label htmlFor="a_sim">Sim</label>
-                <input type="radio" name="a" id="a_nao" value="nao" onChange={(e) => {seta(e.target.value)}}/>
+                <input type="radio" name="a" id="a_nao" value="Não" onChange={(e) => {seta(e.target.value)}}/>
                 <label htmlFor="a_nao">Não</label>
               </div>
             </div>
@@ -233,9 +240,9 @@ export const Avaliacao = () => {
 
           <button className={styles.submit_button} 
           type='submit'
-          onClick={() => {
+          onClick={async () => {
             //ev.preventDefault();
-            addSectTwo({
+            const result = await addSectTwo({
               a: a,
               a_text: a_text,
               b: b,
@@ -254,7 +261,10 @@ export const Avaliacao = () => {
               h_text: h_text,
               i: i,
               i_text: i_text,
-            }, user.email);
+            }, user.email, user.uf, user.municipio);
+            if(result == 'ok') {
+              navigate('/adaps');
+            }
           }}
           >Avançar</button>
         </form>
