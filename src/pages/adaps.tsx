@@ -69,7 +69,7 @@ export const Adaps = () => {
                 <label className={styles.group_label}>Deslocamento:</label>
                 <br/>
                 <input type="radio" name="c_1" id="c1_excelente" value="Excelente" required onChange={(e) => {setc1(e.target.value)}}/>
-                <label htmlFor="c_exelente">Excelente</label>
+                <label htmlFor="c1_excelente">Excelente</label>
                 <input type="radio" name="c_1" id="c_muito_satisfatório" value="Muito satisfatório" onChange={(e) => {setc1(e.target.value)}}/>
                 <label htmlFor="c_muito_satisfatório">Muito satisfatório</label>
                 <input type="radio" name="c_1" id="c_satisfatório" value="Satisfatório" onChange={(e) => {setc1(e.target.value)}}/>
@@ -85,15 +85,15 @@ export const Adaps = () => {
                 <label className={styles.group_label}>Infraestrutura da UBS para realização da tutoria:</label>
                 <br/>
                 <input type="radio" name="c_2" id="c2_excelente" value="Excelente" required onChange={(e) => {setc2(e.target.value)}}/>
-                <label htmlFor="c_exelente">Excelente</label>
-                <input type="radio" name="c_2" id="c_muito_satisfatório" value="Muito satisfatório" onChange={(e) => {setc2(e.target.value)}}/>
-                <label htmlFor="c_muito_satisfatório">Muito satisfatório</label>
-                <input type="radio" name="c_2" id="c_satisfatório" value="Satisfatório" onChange={(e) => {setc2(e.target.value)}}/>
-                <label htmlFor="c_satisfatório">Satisfatório</label>
-                <input type="radio" name="c_2" id="c_pouco_satisfatório" value="Pouco satisfatório" onChange={(e) => {setc2(e.target.value)}}/>
-                <label htmlFor="c_pouco_satisfatório">Pouco satisfatório</label>
-                <input type="radio" name="c_2" id="c_insatisfatório" value="Insatisfatório" onChange={(e) => {setc2(e.target.value)}}/>
-                <label htmlFor="c_insatisfatório">Insatisfatório</label>
+                <label htmlFor="c2_excelente">Excelente</label>
+                <input type="radio" name="c_2" id="c2_muito_satisfatório" value="Muito satisfatório" onChange={(e) => {setc2(e.target.value)}}/>
+                <label htmlFor="c2_muito_satisfatório">Muito satisfatório</label>
+                <input type="radio" name="c_2" id="c2_satisfatório" value="Satisfatório" onChange={(e) => {setc2(e.target.value)}}/>
+                <label htmlFor="c2_satisfatório">Satisfatório</label>
+                <input type="radio" name="c_2" id="c2_pouco_satisfatório" value="Pouco satisfatório" onChange={(e) => {setc2(e.target.value)}}/>
+                <label htmlFor="c2_pouco_satisfatório">Pouco satisfatório</label>
+                <input type="radio" name="c_2" id="c2_insatisfatório" value="Insatisfatório" onChange={(e) => {setc2(e.target.value)}}/>
+                <label htmlFor="c2_insatisfatório">Insatisfatório</label>
               </div>
             </div>
             <div className={styles.radio_group}>
@@ -101,15 +101,15 @@ export const Adaps = () => {
                 <label className={styles.group_label}>Processo formativo da tutoria:</label>
                 <br/>
                 <input type="radio" name="c_3" id="c3_excelente" value="Excelente" required onChange={(e) => {setc3(e.target.value)}}/>
-                <label htmlFor="c_exelente">Excelente</label>
-                <input type="radio" name="c_3" id="c_muito_satisfatório" value="Muito satisfatório" onChange={(e) => {setc3(e.target.value)}}/>
-                <label htmlFor="c_muito_satisfatório">Muito satisfatório</label>
-                <input type="radio" name="c_3" id="c_satisfatório" value="Satisfatório" onChange={(e) => {setc3(e.target.value)}}/>
-                <label htmlFor="c_satisfatório">Satisfatório</label>
-                <input type="radio" name="c_3" id="c_pouco_satisfatório" value="Pouco satisfatório" onChange={(e) => {setc3(e.target.value)}}/>
-                <label htmlFor="c_pouco_satisfatório">Pouco satisfatório</label>
-                <input type="radio" name="c_3" id="c_insatisfatório" value="Insatisfatório" onChange={(e) => {setc3(e.target.value)}}/>
-                <label htmlFor="c_insatisfatório">Insatisfatório</label>
+                <label htmlFor="c3_excelente">Excelente</label>
+                <input type="radio" name="c_3" id="c3_muito_satisfatório" value="Muito satisfatório" onChange={(e) => {setc3(e.target.value)}}/>
+                <label htmlFor="c3_muito_satisfatório">Muito satisfatório</label>
+                <input type="radio" name="c_3" id="c3_satisfatório" value="Satisfatório" onChange={(e) => {setc3(e.target.value)}}/>
+                <label htmlFor="c3_satisfatório">Satisfatório</label>
+                <input type="radio" name="c_3" id="c3_pouco_satisfatório" value="Pouco satisfatório" onChange={(e) => {setc3(e.target.value)}}/>
+                <label htmlFor="c3_pouco_satisfatório">Pouco satisfatório</label>
+                <input type="radio" name="c_3" id="c3_insatisfatório" value="Insatisfatório" onChange={(e) => {setc3(e.target.value)}}/>
+                <label htmlFor="c3_insatisfatório">Insatisfatório</label>
               </div>
             </div>
             <div className={styles.radio_group}>
@@ -117,15 +117,15 @@ export const Adaps = () => {
                 <label className={styles.group_label}>Produtividade do médico bolsista no período da Tutoria:</label>
                 <br/>
                 <input type="radio" name="c_4" id="c4_excelente" value="Excelente" required onChange={(e) => {setc4(e.target.value)}}/>
-                <label htmlFor="c_exelente">Excelente</label>
-                <input type="radio" name="c_4" id="c_muito_satisfatório" value="Muito satisfatório" onChange={(e) => {setc4(e.target.value)}}/>
-                <label htmlFor="c_muito_satisfatório">Muito satisfatório</label>
-                <input type="radio" name="c_4" id="c_satisfatório" value="Satisfatório" onChange={(e) => {setc4(e.target.value)}}/>
-                <label htmlFor="c_satisfatório">Satisfatório</label>
-                <input type="radio" name="c_4" id="c_pouco_satisfatório" value="Pouco satisfatório" onChange={(e) => {setc4(e.target.value)}}/>
-                <label htmlFor="c_pouco_satisfatório">Pouco satisfatório</label>
-                <input type="radio" name="c_4" id="c_insatisfatório" value="Insatisfatório" onChange={(e) => {setc4(e.target.value)}}/>
-                <label htmlFor="c_insatisfatório">Insatisfatório</label>
+                <label htmlFor="c4_excelente">Excelente</label>
+                <input type="radio" name="c_4" id="c4_muito_satisfatório" value="Muito satisfatório" onChange={(e) => {setc4(e.target.value)}}/>
+                <label htmlFor="c4_muito_satisfatório">Muito satisfatório</label>
+                <input type="radio" name="c_4" id="c4_satisfatório" value="Satisfatório" onChange={(e) => {setc4(e.target.value)}}/>
+                <label htmlFor="c4_satisfatório">Satisfatório</label>
+                <input type="radio" name="c_4" id="c4_pouco_satisfatório" value="Pouco satisfatório" onChange={(e) => {setc4(e.target.value)}}/>
+                <label htmlFor="c4_pouco_satisfatório">Pouco satisfatório</label>
+                <input type="radio" name="c_4" id="c4_insatisfatório" value="Insatisfatório" onChange={(e) => {setc4(e.target.value)}}/>
+                <label htmlFor="c4_insatisfatório">Insatisfatório</label>
               </div>
             </div>
 
