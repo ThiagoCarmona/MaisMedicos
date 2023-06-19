@@ -1,17 +1,14 @@
 import { addSectTwo } from '../api/medicosAPI';
-import styles from './avaliacao.module.css';
+import styles from './primeiraEtapa.module.css';
 import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../contexts/User/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { getCities, getUfs, checkEmail } from '../api/medicosAPI';
+import { Alert, Modal } from '@mui/material';
+import { FiX } from 'react-icons/fi';
 export const Avaliacao = () => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
-
-  useEffect(() => {
-    if(!user.email) {
-      navigate('/');
-    }
-  }, [user.email, navigate]);
 
   const [a, seta] = useState('' as string);
   const [a_text, seta_text] = useState('' as string);
@@ -40,10 +37,74 @@ export const Avaliacao = () => {
   const [i, seti] = useState('' as string);
   const [i_text, seti_text] = useState('' as string);
 
+  //CIDADE UF E EMAIL
+
+  useEffect(() => {
+    getUfs().then((res) => {
+      setUFsList(res);
+    });
+  }, []);
+
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertOpen, setAlertOpen] = useState(false);
+
+  const [email, setEmail] = useState('');
+
+  const [UF, setUF] = useState('');
+  const [city, setCity] = useState('');
+
+  const [UFsList, setUFsList] = useState<string[]>([]);
+  const [citiesList, setCitiesList] = useState<{
+    local: any;
+    codIbge: any;
+  }[]>([]);
+
+
+  const handleUFChange = (e: any) => {
+    setCitiesList([]);
+    setUF(e.target.value);
+    getCities(e.target.value).then((res) => {
+      setCitiesList(res);
+    });
+  }
+
+  const handleCityChange = (e: any) => {
+    setCity(e.target.value);
+  }
+
   return (
     <div>
-      <h1 className={styles.title}>AVALIAÇÃO DO PROGRAMA MÉDICOS PELO BRASIL</h1>
+      <h1 className={styles.title}>Confirme as obrigações cumpridas pelo seu município</h1>
       <div className={styles.container}>
+        <div className={styles.selection_area}>
+          <div className={styles.form_group}>
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" onChange={(e) => {setEmail(e.target.value)}}/>
+          </div>
+          <div className={styles.form_group}>
+            <label htmlFor="UF">UF</label>
+            <select name="UF" id="UF" onChange={handleUFChange}>
+              <option value="disabled" disabled selected>Selecione</option>
+              {UFsList.map((uf, i) => {
+                return (
+                  <option value={uf} key={i}>{uf}</option>
+                )
+              })}
+            </select>
+          </div>
+
+          <div className={styles.form_group}>
+            <label htmlFor="city">Município</label>
+            <select name="city" id="city" onChange={handleCityChange}>
+              <option value="disabled" disabled selected>Selecione</option>
+              {citiesList.map((city, i) => {
+                return (
+                  <option value={city.codIbge} key={i}>{city.local}</option>
+                )
+              })}
+            </select>
+          </div>
+        </div>
         <form className={styles.form} action='/'>
           <div className={styles.form_group}>
             <label htmlFor="email">Realiza a recepção dos médicos tutores e médicos bolsistas?</label>
@@ -237,11 +298,52 @@ export const Avaliacao = () => {
             </div>
           </div>
 
+          <Modal
+          open={alertOpen}
+          aria-labelledby="modal-modal-title"
+          style={{
+            display: 'flex',
+            alignItems: "start",
+            justifyContent: 'center',
+          }}
+        >
+          <div className={styles.modal}>
+            <div className={styles.close_modal} onClick={() => {
+              setAlertOpen(false);
+            }}>
+              <FiX size={40}/>
+            </div>
+            <Alert severity="error" style={{
+              margin: 20,
+            }}>{alertMessage}</Alert>
+          </div>
+        </Modal>
+
 
           <button className={styles.submit_button} 
           type='submit'
           onClick={async () => {
-            //ev.preventDefault();
+            //check if all fields are filled
+            if(a === '' || b === '' || c === '' || d === '' || e === '' || f === '' || g === '' || h === '' || i === '') {
+              setAlertMessage('Por favor, preencha todos os campos de avaliação');
+              setAlertOpen(true);
+              return;
+            }
+            if(email === '' || UF === '' || city === '') {
+              setAlertMessage('Por favor, preencha todos os campos de identificação');
+              setAlertOpen(true);
+              return;
+            }
+
+            if(await checkEmail(email)) {
+              setAlertMessage('Email já cadastrado');
+              setAlertOpen(true);
+              return;
+            }
+
+            user.saveEmail(email);
+            user.saveUf(UF);
+            user.saveMunicipio(city);
             const result = await addSectTwo({
               a: a,
               a_text: a_text,
@@ -263,7 +365,7 @@ export const Avaliacao = () => {
               i_text: i_text,
             }, user.email, user.uf, user.municipio);
             if(result == 'ok') {
-              navigate('/adaps');
+              navigate('/segundaetapa');
             }
           }}
           >Avançar</button>

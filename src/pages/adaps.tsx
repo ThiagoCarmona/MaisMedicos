@@ -1,4 +1,4 @@
-import styles from './avaliacao.module.css';
+import styles from './primeiraEtapa.module.css';
 import { useState, useContext } from 'react';
 import { addAdaps } from '../api/medicosAPI';
 import { UserContext } from '../contexts/User/UserContext';
@@ -60,6 +60,44 @@ export const Adaps = () => {
             </div>
           </div>
 
+          <div className={styles.form_group}>
+            <label htmlFor="email">A ADAPS tem fiscalizado, de forma concomitante com o município, o cumprimento da execução pelo médico da carga horária de 40 (quarenta) horas semanais, no que se refere às atividades assistenciais?</label>
+            <div className={styles.radio_group}>
+              <div className={styles.radio}>
+                <input type="radio" name="d" id="d_sim" value="sim" required onChange={(e) => {setd(e.target.value)}}/>
+                <label htmlFor="d_sim">Sim</label>
+                <input type="radio" name="d" id="d_nao" value="nao" onChange={(e) => {setd(e.target.value)}}/>
+                <label htmlFor="d_nao">Não</label>
+                <input type="radio" name="d" id="d_nao_sei" value="não sei" onChange={(e) => {setd(e.target.value)}}/>
+                <label htmlFor="d_nao_sei">Não sei</label>
+              </div>
+            </div>
+            <div className={styles.obs_group} style={
+              d !== "" ? {display: 'flex'} : {display: 'none'}
+            }>
+              <label htmlFor="d_text" className={styles.obs_label}>Justifique sua resposta</label>
+              <textarea required name="d_text" id="d_text" rows={4} onChange={(e) => {setd_text(e.target.value)}}></textarea>
+            </div>
+          </div>
+            
+
+          <div className={styles.form_group}>
+            <label htmlFor="email">Como você avalia o envolvimento e disponibilidade da ADAPS, no apoio e fiscalização das ações do PMpB no seu município?</label>
+            <div className={styles.radio_group}>
+              <div className={styles.radio}>
+                <input type="radio" name="e" id="e_excelente" value="Excelente" required onChange={(ev) => {sete(ev.target.value)}}/>
+                <label htmlFor="e_excelente">Excelente</label>
+                <input type="radio" name="e" id="e_muito_satisfatório" value="Muito satisfatório" onChange={(ev) => {sete(ev.target.value)}}/>
+                <label htmlFor="e_muito_satisfatório">Muito satisfatório</label>
+                <input type="radio" name="e" id="e_satisfatório" value="Satisfatório" onChange={(ev) => {sete(ev.target.value)}}/>
+                <label htmlFor="e_satisfatório">Satisfatório</label>
+                <input type="radio" name="e" id="e_pouco_satisfatório" value="Pouco satisfatório" onChange={(ev) => {sete(ev.target.value)}}/>
+                <label htmlFor="e_pouco_satisfatório">Pouco satisfatório</label>
+                <input type="radio" name="e" id="e_insatisfatório" value="Insatisfatório" onChange={(ev) => {sete(ev.target.value)}}/>
+                <label htmlFor="e_insatisfatório">Insatisfatório</label>
+              </div>
+            </div>
+          </div>
 
           <div className={styles.form_group}>
             <label htmlFor="email">Como você avalia a Tutoria no Programa Médicos pelo Brasil em relação a:</label>
@@ -129,46 +167,6 @@ export const Adaps = () => {
               </div>
             </div>
 
-          </div>
-
-
-          <div className={styles.form_group}>
-            <label htmlFor="email">A ADAPS tem fiscalizado, de forma concomitante com o município, o cumprimento da execução pelo médico da carga horária de 40 (quarenta) horas semanais, no que se refere às atividades assistenciais?</label>
-            <div className={styles.radio_group}>
-              <div className={styles.radio}>
-                <input type="radio" name="d" id="d_sim" value="sim" required onChange={(e) => {setd(e.target.value)}}/>
-                <label htmlFor="d_sim">Sim</label>
-                <input type="radio" name="d" id="d_nao" value="nao" onChange={(e) => {setd(e.target.value)}}/>
-                <label htmlFor="d_nao">Não</label>
-                <input type="radio" name="d" id="d_nao_sei" value="não sei" onChange={(e) => {setd(e.target.value)}}/>
-                <label htmlFor="d_nao_sei">Não sei</label>
-              </div>
-            </div>
-            <div className={styles.obs_group} style={
-              d !== "" ? {display: 'flex'} : {display: 'none'}
-            }>
-              <label htmlFor="d_text" className={styles.obs_label}>Justifique sua resposta</label>
-              <textarea required name="d_text" id="d_text" rows={4} onChange={(e) => {setd_text(e.target.value)}}></textarea>
-            </div>
-          </div>
-            
-
-          <div className={styles.form_group}>
-            <label htmlFor="email">Como você avalia o envolvimento e disponibilidade da ADAPS, no apoio e fiscalização das ações do PMpB no seu município?</label>
-            <div className={styles.radio_group}>
-              <div className={styles.radio}>
-                <input type="radio" name="e" id="e_excelente" value="Excelente" required onChange={(ev) => {sete(ev.target.value)}}/>
-                <label htmlFor="e_excelente">Excelente</label>
-                <input type="radio" name="e" id="e_muito_satisfatório" value="Muito satisfatório" onChange={(ev) => {sete(ev.target.value)}}/>
-                <label htmlFor="e_muito_satisfatório">Muito satisfatório</label>
-                <input type="radio" name="e" id="e_satisfatório" value="Satisfatório" onChange={(ev) => {sete(ev.target.value)}}/>
-                <label htmlFor="e_satisfatório">Satisfatório</label>
-                <input type="radio" name="e" id="e_pouco_satisfatório" value="Pouco satisfatório" onChange={(ev) => {sete(ev.target.value)}}/>
-                <label htmlFor="e_pouco_satisfatório">Pouco satisfatório</label>
-                <input type="radio" name="e" id="e_insatisfatório" value="Insatisfatório" onChange={(ev) => {sete(ev.target.value)}}/>
-                <label htmlFor="e_insatisfatório">Insatisfatório</label>
-              </div>
-            </div>
           </div>
 
 

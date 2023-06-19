@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
-import styles from "./home.module.css";
-import { getUfs, getCities, getMedicos, addAvaliacao, checkEmail } from "../api/medicosAPI";
+import styles from "./segundaEtapa.module.css";
+import { getMedicos, addAvaliacao } from "../api/medicosAPI";
 import { Modal } from "@mui/material"
 import { FiX } from "react-icons/fi";
 import {Alert} from "@mui/material"
@@ -9,19 +9,19 @@ import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask"
 export const Home = () => {
 
+  
+  const navigate = useNavigate();
   const user = useContext(UserContext);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    console.log(user)
+    if(!user.municipio) {
+      console.log("no municipio")
+      //navigate('/');
+    }
+  }, [user, user.municipio]);
+  
 
-  const [email, setEmail] = useState('');
-  const [UF, setUF] = useState('');
-  const [city, setCity] = useState('');
-
-  const [UFsList, setUFsList] = useState<string[]>([]);
-  const [citiesList, setCitiesList] = useState<{
-    local: any;
-    codIbge: any;
-  }[]>([]);
   const [medicosList, setMedicosList] = useState<{
     ativos: string[],
     inativos: string[],
@@ -32,15 +32,26 @@ export const Home = () => {
   const [addMedicoNome, setAddMedicoNome] = useState('');
   const [addMedicoCPF, setAddMedicoCPF] = useState('');
   const [addMedicoStatus, setAddMedicoStatus] = useState('');
+  const [medicosLoaded, setMedicosLoaded] = useState(false);
 
   const [alertMessage, setAlertMessage] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
 
   useEffect(() => {
-    getUfs().then((res) => {
-      setUFsList(res);
-    });
-  }, []);
+    const getMedicosList = async () => {
+      const result = await getMedicos(user.municipio);
+      setMedicosList(result);
+      setMedicosLoaded(true);
+    }
+    getMedicosList();
+  }, [user.uf, user.municipio]);
+
+  const selectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const select = e.target;
+    if (select.value !== 'disabled') {
+      select.style.border = '1px solid #ccc';
+    }
+  }
 
   const submitHandler = async () => {
     //check card values
@@ -86,29 +97,14 @@ export const Home = () => {
       }
     });
 
-    if(!email) {
-      setAlertMessage('Por favor, preencha o campo email');
-      setAlertOpen(true);
-      return;
-    }
-
-
 
 
     if(allValid) {
-      if(await checkEmail(email)) {
-        setAlertMessage('Este email já enviou uma avaliação, se desejar alterar a pesquisa, entre em contato com o administrador. andre.luiz@saude.gov.br');
-        setAlertOpen(true);
-        return;
-      }
       const qtMedicos = medicosList.ativos.length + medicosList.inativos.length;
       console.log(qtMedicos)
-      const result = await addAvaliacao(email, UF, city, qtMedicos, valuesAgregated.Excelente || 0, valuesAgregated['Muito satisfatorio'] || 0, valuesAgregated.Satisfatório || 0, valuesAgregated['Pouco satisfatório'] || 0, valuesAgregated.Insatisfatório || 0)
-      user.saveEmail(email);
-      user.saveUf(UF);
-      user.saveMunicipio(city);
+      const result = await addAvaliacao(user.email, user.uf, user.municipio, qtMedicos, valuesAgregated.Excelente || 0, valuesAgregated['Muito satisfatorio'] || 0, valuesAgregated.Satisfatório || 0, valuesAgregated['Pouco satisfatório'] || 0, valuesAgregated.Insatisfatório || 0);
       console.log(result)
-      navigate('/avaliacao');
+      navigate('/adaps');
     }else{
       setAlertMessage('Por favor, preencha todos os campos de avaliação');
       setAlertOpen(true);
@@ -116,64 +112,14 @@ export const Home = () => {
 
   }
 
-  const handleUFChange = (e: any) => {
-    setCitiesList([]);
-    setUF(e.target.value);
-    getCities(e.target.value).then((res) => {
-      setCitiesList(res);
-    });
-    setMedicosList({
-      ativos: [],
-      inativos: [],
-    });
-  }
-
-  const handleCityChange = (e: any) => {
-    setMedicosList({
-      ativos: [],
-      inativos: [],
-    });
-    setCity(e.target.value);
-    getMedicos(e.target.value).then((res) => {
-      setMedicosList(res);
-    });
-  }
-
 
   return (
     <div className={styles.home_container}>
-      <div className={styles.selection_area}>
-        <div className={styles.form_group}>
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" onChange={(e) => {setEmail(e.target.value)}}/>
-        </div>
-        <div className={styles.form_group}>
-          <label htmlFor="UF">UF</label>
-          <select name="UF" id="UF" onChange={handleUFChange}>
-            <option value="disabled" disabled selected>Selecione</option>
-            {UFsList.map((uf, i) => {
-              return (
-                <option value={uf} key={i}>{uf}</option>
-              )
-            })}
-          </select>
-        </div>
-
-        <div className={styles.form_group}>
-          <label htmlFor="city">Município</label>
-          <select name="city" id="city" onChange={handleCityChange}>
-            <option value="disabled" disabled selected>Selecione</option>
-            {citiesList.map((city, i) => {
-              return (
-                <option value={city.codIbge} key={i}>{city.local}</option>
-              )
-            })}
-          </select>
-        </div>
-      </div>
+      
+      <h1>Avalie o desempenho dos médicos participantes do Programa Médicos pelo Brasil</h1>
 
       <div className={styles.add_medico_area} style={{
-        display: city ? 'flex' : 'none'
+        display: medicosLoaded ? 'flex' : 'none'
       }}>
         <button type="button" name="nao_listado" onClick={() => {
           setModalOpen(true);
@@ -257,7 +203,7 @@ export const Home = () => {
                 <h3>{medico}</h3>
               </div>
               <div className={styles.medico_card_body}>
-                <select name="avaliacao" id="avaliacao">
+                <select name="avaliacao" id="avaliacao" onChange={selectHandler}>
                   <option value="disabled" disabled selected>Selecione</option>
                   <option value="Excelente">Excelente</option>
                   <option value="Muito satisfatorio">Muito satisfatorio</option>
@@ -278,7 +224,7 @@ export const Home = () => {
                 <h3>{medico}</h3>
               </div>
               <div className={styles.medico_card_body}>
-                <select name="avaliacao" id="avaliacao">
+                <select name="avaliacao" id="avaliacao" onChange={selectHandler}>
                   <option value="disabled" disabled selected>Selecione</option>
                   <option value="Excelente">Excelente</option>
                   <option value="Muito satisfatorio">Muito satisfatorio</option>
@@ -293,7 +239,7 @@ export const Home = () => {
       </div>
       <div className={styles.submit_area}>
 
-        <Modal
+      <Modal
           open={alertOpen}
           aria-labelledby="modal-modal-title"
           style={{
