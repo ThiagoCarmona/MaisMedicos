@@ -336,7 +336,7 @@ export const Avaliacao = () => {
             }
 
             if(await checkEmail(email)) {
-              setAlertMessage('Email já cadastrado');
+              setAlertMessage('Este email já enviou uma avaliação, caso queira alterar, entre em contato com o administrador pelo email andre.luiz@saude.gov.br');
               setAlertOpen(true);
               return;
             }

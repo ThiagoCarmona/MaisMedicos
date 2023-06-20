@@ -2,10 +2,12 @@ import styles from './primeiraEtapa.module.css';
 import { useState, useContext } from 'react';
 import { addAdaps } from '../api/medicosAPI';
 import { UserContext } from '../contexts/User/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Adaps = () => {
 
   const user = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [a, seta] = useState('' as string);
 
@@ -172,6 +174,11 @@ export const Adaps = () => {
 
           <button className={styles.submit_button} 
           onClick={async () => {
+            if(a === '' || b === '' || b_text === '' || c1 === '' || c2 === '' || c3 === '' || c4 === '' || d === '' || d_text === '' || e === '') {
+              alert('Preencha todos os campos!');
+              return;
+            }
+
             const data = {
               a: a,
               b: b,
@@ -198,7 +205,7 @@ export const Adaps = () => {
             setd_text('');
             sete('');
 
-            alert('Avaliação enviada com sucesso!');
+            navigate("/concluido")
             
           }}
           >Concluir</button>
