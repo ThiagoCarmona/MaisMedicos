@@ -11,6 +11,7 @@ import emailValidator from "email-validator";
 export const Avaliacao = () => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
+  const [sendButtonText, setSendButtonText] = useState('Avançar');
 
   const [a, seta] = useState('' as string);
   const [a_text, seta_text] = useState('' as string);
@@ -360,6 +361,7 @@ export const Avaliacao = () => {
             user.saveEmail(email);
             user.saveUf(UF);
             user.saveMunicipio(city);
+            setSendButtonText('Enviando...');
             const result = await addSectTwo({
               a: a,
               a_text: a_text,
@@ -382,9 +384,13 @@ export const Avaliacao = () => {
             }, user.email, user.uf, user.municipio);
             if(result == 'ok') {
               navigate('/segundaetapa');
+            }else{
+              setAlertMessage('Ocorreu um erro ao enviar sua avaliação, por favor, tente novamente mais tarde.');
+              setAlertOpen(true);
+              setSendButtonText('Avançar');
             }
           }}
-          >Avançar</button>
+          >{sendButtonText}</button>
         </form>
       </div>
     </div>

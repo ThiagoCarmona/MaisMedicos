@@ -262,7 +262,7 @@ export const Home = () => {
 
         <button type="submit" style={{
           display: medicosList.inativos.length + medicosList.ativos.length ? 'block' : 'none'
-        }} onClick={submitHandler}>Enviar</button>
+        }} onClick={submitHandler}>Avançar</button>
       </div>
     </div>
   );
