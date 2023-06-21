@@ -2,16 +2,16 @@
     font-size: 1.5em;
     text-align: center;
     color: #000000;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0px 20px 0px;
+    padding: 20px;
 }
 
 .mainTitle{
     font-size: 2em;
     text-align: center;
     color: #000000;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0px 20px 0px;
+    padding: 20px;
 }
 
 .container {
@@ -44,13 +44,11 @@
     border: 1px solid #ccc;
     font-size: 1.2rem;
     box-shadow: 5px 5px 5px 0px rgba(119, 119, 119, 0.75);
-    width: 300px;
+    max-width: 250px;
   }
 
 .selection_area {
-    min-width: 250px;
-    background-color: #C6C6C6;
-    padding: 15px;
+  background-color: rgb(204, 204, 204);
     border-radius: 5px;
     box-shadow: 5px 5px 5px 0px rgba(119, 119, 119, 0.75);
     margin-bottom: 15px;
