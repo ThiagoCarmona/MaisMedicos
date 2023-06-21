@@ -74,6 +74,7 @@ export const Avaliacao = () => {
 
   return (
     <div>
+      <h1 className={styles.mainTitle}>Avaliação de satisfação dos gestores municipais - Programa Médicos pelo Brasil</h1>
       <h1 className={styles.title}>Confirme as obrigações cumpridas pelo seu município</h1>
       <div className={styles.container}>
         <div className={styles.selection_area}>
