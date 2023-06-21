@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { getCities, getUfs, checkEmail } from '../api/medicosAPI';
 import { Alert, Modal } from '@mui/material';
 import { FiX } from 'react-icons/fi';
+import emailValidator from "email-validator";
+
 export const Avaliacao = () => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
@@ -144,7 +146,7 @@ export const Avaliacao = () => {
               <label htmlFor="b_text" className={styles.obs_label}>{
                 b === 'sim' ? 'Descreva como realiza esta atividade' : 'Justifique'
               }</label>
-              <textarea required name="b_text" id="b_text" rows={4} onChange={(e) => {setb_text(e.target.value)}}></textarea>
+              <textarea required={b === 'nao' ? true : false} name="b_text" id="b_text" rows={4} onChange={(e) => {setb_text(e.target.value)}}></textarea>
             </div>
           </div>
 
@@ -165,7 +167,7 @@ export const Avaliacao = () => {
               <label htmlFor="c_text" className={styles.obs_label}>{
                 c === 'sim' ? 'Descreva como realiza esta atividade' : 'Justifique'
               }</label>
-              <textarea required name="c_text" id="c_text" rows={4} onChange={(e) => {setc_text(e.target.value)}}></textarea>
+              <textarea required={c === 'nao' ? true : false} name="c_text" id="c_text" rows={4} onChange={(e) => {setc_text(e.target.value)}}></textarea>
             </div>
           </div>
 
@@ -186,7 +188,7 @@ export const Avaliacao = () => {
               <label htmlFor="d_text" className={styles.obs_label}>{
                 d === 'sim' ? 'Descreva como realiza esta atividade' : 'Justifique'
               }</label>
-              <textarea required name="d_text" id="d_text" rows={4} onChange={(e) => {setd_text(e.target.value)}}></textarea>
+              <textarea required={d === 'nao' ? true : false} name="d_text" id="d_text" rows={4} onChange={(e) => {setd_text(e.target.value)}}></textarea>
             </div>
           </div>
             
@@ -339,6 +341,12 @@ export const Avaliacao = () => {
             }
             if(email === '' || UF === '' || city === '') {
               setAlertMessage('Por favor, preencha todos os campos de identificação');
+              setAlertOpen(true);
+              return;
+            }
+
+            if(!emailValidator.validate(email)) {
+              setAlertMessage('Por favor, insira um email válido');
               setAlertOpen(true);
               return;
             }

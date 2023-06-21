@@ -58,7 +58,7 @@ export const Adaps = () => {
               <label htmlFor="b_text" className={styles.obs_label}>{
                 b === 'sim' ? 'Descreva como realiza esta atividade' : 'Justifique'
               }</label>
-              <textarea required name="b_text" id="b_text" rows={4} onChange={(e) => {setb_text(e.target.value)}}></textarea>
+              <textarea required={b === 'sim' ? false : true} name="b_text" id="b_text" rows={4} onChange={(e) => {setb_text(e.target.value)}}></textarea>
             </div>
           </div>
 
