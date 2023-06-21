@@ -173,7 +173,13 @@ export const Adaps = () => {
 
 
           <button className={styles.submit_button} 
-          onClick={async () => {
+          onClick={async (ev) => {
+            ev.preventDefault();
+            const form = document.querySelector('form');
+            if(!form?.checkValidity()) {
+              form?.reportValidity();
+              return
+            }
             if(a === '' || b === '' || c1 === '' || c2 === '' || c3 === '' || c4 === '' || d === '' || e === '') {
               alert('Preencha todos os campos!');
               return;

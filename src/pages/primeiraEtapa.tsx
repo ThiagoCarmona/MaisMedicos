@@ -323,8 +323,15 @@ export const Avaliacao = () => {
 
           <button className={styles.submit_button} 
           type='submit'
-          onClick={async () => {
-            //check if all fields are filled
+          onClick={async (ev) => {
+            ev.preventDefault();
+            const form = document.querySelector('form');
+            if(!form?.checkValidity()) {
+              //setAlertMessage('Por favor, preencha todos os campos de avaliação');
+              //setAlertOpen(true);
+              form?.reportValidity();
+              return;
+            }
             if(a === '' || b === '' || c === '' || d === '' || e === '' || f === '' || g === '' || h === '' || i === '') {
               setAlertMessage('Por favor, preencha todos os campos de avaliação');
               setAlertOpen(true);
