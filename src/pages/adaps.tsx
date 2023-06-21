@@ -174,7 +174,15 @@ export const Adaps = () => {
 
           <button className={styles.submit_button} 
           onClick={async () => {
-            if(a === '' || b === '' || b_text === '' || c1 === '' || c2 === '' || c3 === '' || c4 === '' || d === '' || d_text === '' || e === '') {
+            if(a === '' || b === '' || c1 === '' || c2 === '' || c3 === '' || c4 === '' || d === '' || e === '') {
+              alert('Preencha todos os campos!');
+              return;
+            }
+            if(b === 'nao' && b_text === '') {
+              alert('Preencha todos os campos!');
+              return;
+            }
+            if(d !== "" && d_text === '') {
               alert('Preencha todos os campos!');
               return;
             }
