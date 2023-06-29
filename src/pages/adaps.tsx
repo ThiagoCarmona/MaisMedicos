@@ -1,5 +1,5 @@
 import styles from './primeiraEtapa.module.css';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { addAdaps } from '../api/medicosAPI';
 import { UserContext } from '../contexts/User/UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,12 @@ export const Adaps = () => {
 
   const user = useContext(UserContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.email || !user.municipio || !user.uf) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   const [a, seta] = useState('' as string);
 
