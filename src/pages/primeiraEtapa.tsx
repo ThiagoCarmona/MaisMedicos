@@ -381,7 +381,7 @@ export const Avaliacao = () => {
               h_text: h_text,
               i: i,
               i_text: i_text,
-            }, user.email, user.uf, user.municipio);
+            }, email, UF, city);
             if(result == 'ok') {
               navigate('/segundaetapa');
             }else{
