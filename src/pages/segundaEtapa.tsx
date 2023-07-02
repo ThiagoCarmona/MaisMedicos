@@ -97,13 +97,16 @@ export const Home = () => {
       }
     });
 
-
+    if(!user.email || !user.uf || !user.municipio) {
+      setAlertMessage('Por favor, preencha a primeira etapa do formulário');
+      setAlertOpen(true);
+      return;
+    }
 
     if(allValid) {
       const qtMedicos = medicosList.ativos.length + medicosList.inativos.length;
-      console.log(qtMedicos)
       const result = await addAvaliacao(user.email, user.uf, user.municipio, qtMedicos, valuesAgregated.Excelente || 0, valuesAgregated['Muito satisfatorio'] || 0, valuesAgregated.Satisfatório || 0, valuesAgregated['Pouco satisfatório'] || 0, valuesAgregated.Insatisfatório || 0);
-      console.log(result)
+
       navigate('/adaps');
     }else{
       setAlertMessage('Por favor, preencha todos os campos de avaliação');
