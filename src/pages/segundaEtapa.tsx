@@ -105,7 +105,7 @@ export const Home = () => {
 
     if(allValid) {
       const qtMedicos = medicosList.ativos.length + medicosList.inativos.length;
-      const result = await addAvaliacao(user.email, user.uf, user.municipio, qtMedicos, valuesAgregated.Excelente || 0, valuesAgregated['Muito satisfatorio'] || 0, valuesAgregated.Satisfatório || 0, valuesAgregated['Pouco satisfatório'] || 0, valuesAgregated.Insatisfatório || 0);
+      await addAvaliacao(user.email, user.uf, user.municipio, qtMedicos, valuesAgregated.Excelente || 0, valuesAgregated['Muito satisfatorio'] || 0, valuesAgregated.Satisfatório || 0, valuesAgregated['Pouco satisfatório'] || 0, valuesAgregated.Insatisfatório || 0);
 
       navigate('/adaps');
     }else{
